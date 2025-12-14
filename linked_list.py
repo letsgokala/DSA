@@ -1,20 +1,20 @@
 class Node:
     def __init__(self, data=None, next=None):
         self.data = data
-        self.next = None
+        self.next = next
         
 class LinkedList:
     def __init__(self):
         self.head = None
         
     def insert_at_beginning(self, data):
-        node = Node(data, None)
-        node.next = self.head
+        node = Node(data, self.head)        
         self.head = node
         
     def print(self):
         if self.head is None:
             print("the linked list is empty")
+            return
             
         itr = self.head
         llstr = ""
@@ -22,7 +22,8 @@ class LinkedList:
         while itr:
             llstr += str(itr.data) + " --> "
             itr = itr.next
-            
+
+        llstr += "None"            
         print(llstr)
             
         
@@ -31,6 +32,7 @@ class LinkedList:
         
         if self.head is None:
             self.head = node
+            return
             
         itr = self.head
         
@@ -39,8 +41,7 @@ class LinkedList:
             
         itr.next = node
     
-    def insert_values(self, data_list):
-        self.head = None        
+    def insert_values(self, data_list):              
         for data in data_list:
             self.insert_at_end(data)
             
@@ -48,7 +49,10 @@ class LinkedList:
         count = 0
         iteration = self.head
         while iteration:
-            count += 1            
+            count += 1
+            iteration = iteration.next
+            
+        return count          
             
     def remove_at(self, index):
         if index < 0 or index >= self.get_length():
@@ -58,9 +62,35 @@ class LinkedList:
             self.head = self.head.next
             return
         
-        count =0
+        count = 0
+        itr = self.head
+        while itr:
+            if count == index - 1:
+                print(f"successfully deleted {itr.next.data}")
+                itr.next = itr.next.next                 
+                break
+             
+            itr = itr.next
+            count += 1
+            
+    def insert_at(self, index, data):
+        if index < 0 or index > self.get_length():
+            raise Exception("Invalid index")
         
-    
+        if index == 0:
+            self.head = Node(data, self.head.next)
+            return
+        
+        itr = self.head
+        count = 0
+        while itr:
+            if count == index -1:
+                node = Node(data, itr.next)
+                itr.next = node
+                break
+                
+            itr = itr.next
+            count += 1
     
     
 
@@ -79,8 +109,8 @@ if __name__ == '__main__':
     ll2.insert_at_end(56)
     ll2.insert_at_end(43)
     
+    ll.insert_values([1,2,3,4,5,6,7])
+    ll.remove_at(1)    
+    ll.insert_at(2, 43)
     
-    
-    ll.print()
-    print("\n")
-    ll2.print()
+    ll.print()    
