@@ -41,7 +41,8 @@ class LinkedList:
             
         itr.next = node
     
-    def insert_values(self, data_list):              
+    def insert_values(self, data_list):
+        self.head = None           
         for data in data_list:
             self.insert_at_end(data)
             
@@ -91,7 +92,24 @@ class LinkedList:
                 
             itr = itr.next
             count += 1
-    
+            
+    def insert_after_value(self, index, data):
+        if index < 0 or index > self.get_length():
+            raise Exception("Invalid index")            
+        
+        if index == 0:
+            self.head = Node(data, None)
+            return
+            
+        itr = self.head
+        count = 0
+        while itr:
+            if count == index:
+                node = Node(data, itr.next)
+                itr.next = node
+                break
+            count += 1
+            
     
 
 if __name__ == '__main__':
@@ -99,18 +117,19 @@ if __name__ == '__main__':
     
     ll2 = LinkedList()
     
-    ll.insert_at_beginning(32)
-    ll.insert_at_beginning(28)
-    ll.insert_at_beginning(92)
-    ll.insert_at_beginning(78)
+    # ll.insert_at_beginning(32)
+    # ll.insert_at_beginning(28)
+    # ll.insert_at_beginning(92)
+    # ll.insert_at_beginning(78)
     
-    ll2.insert_at_end(32)
-    ll2.insert_at_end(45)
-    ll2.insert_at_end(56)
-    ll2.insert_at_end(43)
+    # ll2.insert_at_end(32)
+    # ll2.insert_at_end(45)
+    # ll2.insert_at_end(56)
+    # ll2.insert_at_end(43)
     
     ll.insert_values([1,2,3,4,5,6,7])
-    ll.remove_at(1)    
-    ll.insert_at(2, 43)
+    # ll.remove_at(1)    
+    # ll.insert_at(2, 43)
+    ll.insert_after_value(3,2323)
     
     ll.print()    
