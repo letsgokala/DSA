@@ -10,4 +10,21 @@ class HashTable: #hash map is the same as hash table
             
         return h % self.MAX
     
+    def __setitem__(self, key, val):
+        index = self.get_hash(key)
+        self.arr[index] = val
+        
+    def __getitem__(self, key):
+        index = self.get_hash(key)
+        return self.arr[index]
+    
+dic = HashTable()
+# dic.add("march 6")
+# dic.add("march 4")
+# dic.add("march 8")
+dic["march 6"] = "max amini"
+print(dic["march 6"])
+
+# print(dic.arr)
+    
     
