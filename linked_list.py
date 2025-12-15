@@ -102,12 +102,13 @@ class LinkedList:
             return
             
         itr = self.head
-        count = 0
+        count = 1
         while itr:
             if count == index:
                 node = Node(data, itr.next)
                 itr.next = node
                 break
+            itr = itr.next
             count += 1
             
     
