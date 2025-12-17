@@ -12,6 +12,16 @@ students = {
     }
 }
 
+class Student(BaseModel):
+    name: str
+    age: int
+    year: str
+    
+class UpdateStudent(BaseModel):
+    name : Optional[str] = None,
+    age : Optional[int] = None,
+    year : Optional[str] = None
+
 @app.get("/")
 def index():
     return {"name": "khalid muzemil"}
@@ -34,3 +44,27 @@ def get_student_by_name(*, student_id, name: Optional[str] = None, test : int):
             return students[student_id]
         
     return {"Data" : "Data Not Found"}
+
+@app.post("/create-student/{student_id}")
+def createstudent(student_id : int, student : Student):
+    if student_id in students:
+        return {"error": "student exists"}
+        
+    students[student_id] = student.model_dump()
+    return students
+
+@app.put("/update-student/{student_id}")
+def update_student(student_id : int, student : UpdateStudent):
+    if student_id not in students:
+        return {"error" : "studnet was not found"}
+    
+    if student.name != None:
+        students[student_id].name = student.name
+
+    if student.age != None:
+        students[student_id].age = student.age
+        
+    if student.year != None:
+        students[student_id].year = student.year        
+        
+    return students[student_id]
