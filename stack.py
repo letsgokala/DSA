@@ -2,6 +2,7 @@ from collections import deque
 from threading import Thread
 import time
 
+#============================STACK=======================#
 class Stack:
     def __init__(self):
         self.container = deque()
@@ -21,6 +22,8 @@ class Stack:
     def size(self):
         return len(self.container)
     
+    
+  #=====================QUEUE========================#  
 class Queue:
     def __init__(self):
         self.buffer = deque()
@@ -58,20 +61,36 @@ def serve_orders():
     
 orders = ['pizza','samosa','pasta','biryani','burger']
 
-thread1 = Thread(target=place_orders, args=(orders,))
-thread2 = Thread(target=serve_orders, )
+# thread1 = Thread(target=place_orders, args=(orders,))
+# thread2 = Thread(target=serve_orders, )
 
 
-thread1.start()
-thread2.start()
+# thread1.start()
+# thread2.start()
 
-thread1.join()
-thread2.join()
+# thread1.join()
+# thread2.join()
 
-print("done")
+# print("done")
     
 # elts = deque()
 # elts.extend([1,2,3,4,5,6,7,8])
 # print(elts)
 # elts.rotate(1)
 # print(elts)
+
+#=============================EXERCISE 2==============================#
+b_number = Queue()
+#TODO:1. WE ADD 1 TO THE QUEUE
+b_number.enqueue("1")
+print(b_number)
+#TODO:2. THEN WE POP ALL THE QUEUE ELEMENTS AND ADD 1 AND 0 TO THEM
+for i in range(10):
+    num = b_number.dequeue()
+    print(num)
+    b_number.enqueue(num + "0")
+    b_number.enqueue(num + "1")
+    
+
+#TODO:3 THEN ENQUEUE THE NEW ONES TO THE QUEUE
+
