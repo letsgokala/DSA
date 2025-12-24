@@ -21,9 +21,9 @@ class BinarySearchTree:
                 
     def in_order_traversal(self):
         """
-    Traverses the tree in the order: Left -> Root -> Right.
-    In a Binary Search Tree, this visits nodes in ascending (sorted) order.
-    """
+        Traverses the tree in the order: Left -> Root -> Right.
+        In a Binary Search Tree, this visits nodes in ascending (sorted) order.
+        """
         if self.left:
             self.left.in_order_traversal()
         print(self.data)
@@ -52,6 +52,24 @@ class BinarySearchTree:
         if self.right:
             self.right.post_order_traversal()
         print(self.data)
+        
+    def find_max(self):
+        """
+        Traverse the tree and find the maximum value in the tree
+        """
+        if self.right:
+            return self.right.find_max()
+        else:
+            return self.data
+        
+    def find_min(self):
+        """
+        Traverse the tree and find the minimum value in the tree
+        """
+        if self.left:
+            return self.left.find_min()
+        else:
+            return self.data
             
     def search(self, val):
         """
@@ -104,6 +122,9 @@ print(f"==================PRE ORDER TRAVERSAL================")
 bst.pre_order_traversal()
 print(f"==================POST ORDER TRAVERSAL================")
 bst.post_order_traversal()
+
+print(f"Maximum value is - {bst.find_max()}")
+print(f"Minimum value is - {bst.find_min()}")
 print(bst.search(326))
 
     
